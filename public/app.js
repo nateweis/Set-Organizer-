@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
+
     let allCards = [], n = 0, cardsWImg = [];
     const btn = document.querySelector('#btn')
     
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    makeApiCall()
+    // makeApiCall()
 
     btn.addEventListener('click', () => {
         for(let i = 0; i < allCards.length; i++){

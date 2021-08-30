@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="MTGDraft">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTG Set Orginizer</title>
     <link rel="stylesheet" href="./style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
 
     <script
         src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -14,11 +16,16 @@
     </script>
 
     <script src="./app.js"></script>
+    <script src="./angular.js"></script>
 </head>
-<body>
+
+
+<body ng-controller="CardController as cards">
+    
+    <input type="text" placeholder="New Set Name" ng-model="cards.setTitle"> <button ng-click="cards.getNewSet()">Search</button>
     <button id="btn">Show</button>
     <div id="results"></div>
     <img src="" alt="" id="selected">
-
+    {{cards.setTitle}}
 </body>
 </html>
