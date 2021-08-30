@@ -1,0 +1,13 @@
+#results{
+    width: 80%;
+    display: inline-block;
+}
+.card{
+    width: 50px;
+    height: 100px;
+}
+#selected{
+    position: fixed;
+    right: 20px;
+    top: 20px;
+}
