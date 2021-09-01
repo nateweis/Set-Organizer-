@@ -5,26 +5,20 @@ app.controller('CardController', ['$http', '$window', function($http, $window){
     let tempCardHolder = [], n = 0;
     this.setTitle = '';
     this.newSetCards = [];
-    this.allSavedCards = [];
+    this.listOfSets = [];
+    this.allSavedCards = {};
 
     $window.onload = () =>{
         $http({url: '/cards', method: 'GET'})
         .then(data => {
             const res = data.data.data
             res.forEach(c => {
-                let newPack = true, obj = {}
                 c.card = JSON.parse(c.card)
-                for(let i = 0; i < ctrl.allSavedCards.length; i++){
-                    if(ctrl.allSavedCards[i][c.set_name]) {
-                        newPack = false;
-                        ctrl.allSavedCards[i][c.set_name].push(c);
-                    }
-                }
-                if(newPack) {
-                    obj = {[c.set_name]: [c]}
-                    ctrl.allSavedCards.push(obj)
-                }
+
+                if(ctrl.allSavedCards[c.set_name])ctrl.allSavedCards[c.set_name].push(c)
+                else ctrl.allSavedCards[c.set_name] = [c]
             })
+            ctrl.listOfSets = Object.keys(ctrl.allSavedCards)
         })
     }
 
@@ -100,7 +94,9 @@ app.controller('CardController', ['$http', '$window', function($http, $window){
 
 
     ctrl.saveNewSet = ()=> {
-        ctrl.allSavedCards[ctrl.allSavedCards.length] = {[ctrl.newSetCards[0].set_name] : ctrl.newSetCards}
+        ctrl.allSavedCards[ctrl.newSetCards[0].set_name] = ctrl.newSetCards;
+        ctrl.listOfSets.push(ctrl.newSetCards[0].set_name);
+        
         ctrl.newSetCards.forEach(card => {
             let tempObj = card;
             tempObj.card = JSON.stringify(tempObj.card)
@@ -111,7 +107,7 @@ app.controller('CardController', ['$http', '$window', function($http, $window){
     }
 
     this.show = () => {
-        console.log(ctrl.allSavedCards)
+        console.log(ctrl.listOfSets)
     }
 
     
