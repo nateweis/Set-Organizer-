@@ -15,17 +15,23 @@
         crossorigin="anonymous">
     </script>
 
-    <script src="./app.js"></script>
+    <!-- <script src="./app.js"></script> -->
     <script src="./angular.js"></script>
 </head>
 
 
 <body ng-controller="CardController as cards">
     
-    <input type="text" placeholder="New Set Name" ng-model="cards.setTitle"> <button ng-click="cards.getNewSet()">Search</button>
-    <button id="btn">Show</button>
+    <div>
+        <input type="text" placeholder="New Set Name" ng-model="cards.setTitle"> 
+        <button ng-click="cards.getNewSet()">Search</button>
+        <button id="btn" ng-click="cards.saveNewSet()" ng-if="cards.newSetCards.length > 1">Save</button>
+    </div>
+    <br>
+    
+    <button ng-click="cards.show()">Show</button>
     <div id="results"></div>
     <img src="" alt="" id="selected">
-    {{cards.setTitle}}
+    
 </body>
 </html>
